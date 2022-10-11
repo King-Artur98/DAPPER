@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CRUDDaper
 {
-    public class Ver
+    public class VerP
     {
         public int Id_alumno { get; set; }
 
@@ -28,30 +28,7 @@ namespace CRUDDaper
 
         public byte Id_semestre { get; set; }
 
-        public static Resultado Ve(Ver alumno)
-        {
-            Resultado resultado = new Resultado(); 
-
-            try
-            {
-                using (SqlConnection context = new SqlConnection(Conexion.GetConexion()))
-                {
-                    var query = context.Execute($"AlumnoGetAll '{alumno.Nombre}', '{alumno.AP_Paterno}','{alumno.AP_Materno}','{alumno.FechaNac}','{alumno.Matricula}','{alumno.Sexo}','{alumno.Email}',{alumno.Id_semestre}");
-
-                    if (query > 0)
-                    {
-                        resultado.Mensaje = "Correcto";
-                    }
-
-                }
-            }
-            catch (Exception ex)
-            {
-                resultado.Mensaje = "Error" + ex;
-            }
-            return resultado;
-        }
-        public static Resultado GetAll()
+        public static Resultado GetAllB(VerP alumnoo)
         {
             Resultado resultado = new Resultado();
 
@@ -60,12 +37,12 @@ namespace CRUDDaper
                 using (SqlConnection context = new SqlConnection(Conexion.GetConexion()))
                 {
                     //var sql = "AlumnoGetAll";
-                    var lst = context.Query<Ver>("AlumnoGetAll").ToList(); //Dapper
+                    var lst = context.Query<VerP>($"AlumnoGetAllBy {alumnoo.Id_alumno}").ToList(); //Dapper
 
                     resultado.Objetos = new List<object>();
                     foreach (var obj in lst)
                     {
-                        Ver alumno = new Ver();
+                        VerP alumno = new VerP();
 
                         alumno.Id_alumno = obj.Id_alumno;
                         alumno.Nombre = obj.Nombre;
