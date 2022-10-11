@@ -150,13 +150,50 @@ namespace CRUDDaper
                     }
 
                     break;
+
+                case 4:
+
+                    GetAll();
+                    
+                    void GetAll()
+                    {
+
+                        Resultado resultado = Ver.GetAll();
+
+
+                        if (resultado.Mensaje == "Correcto")
+                        {
+                            foreach (Ver alumno in resultado.Objetos)
+                            {
+                                Console.WriteLine("***********************************************************************************************");
+                                Console.WriteLine("Id_Alumno:  " + alumno.Id_alumno);
+                                Console.WriteLine("Nombre:  " + alumno.Nombre);
+                                Console.WriteLine("Apellido Paterno: " + alumno.AP_Paterno);
+                                Console.WriteLine("Apellido Materno: " + alumno.AP_Materno);
+                                Console.WriteLine("Fecha de nacimiento: " + alumno.FechaNac);
+                                Console.WriteLine("Matricula: " + alumno.Matricula);
+                                Console.WriteLine("Genero: " + alumno.Sexo);
+                                Console.WriteLine("Email: " + alumno.Email);
+                                Console.WriteLine("Semestre: " + alumno.Id_semestre);
+                                Console.WriteLine("***********************************************************************************************" );
+                                Console.ReadKey();
+                            }
+                        }
+
+                        else
+                                {
+                            Console.WriteLine("Ocurrio un error en la consulta");
+                            Console.ReadKey();
+                        }
+                    }
+
+                    break;
+
+
+
+
+
             }
-
-
-
-
-
-
-        }
     }
+ }
 }
